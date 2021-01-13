@@ -274,7 +274,9 @@ function begin(Year,Month,days,Jcheika){
                 
 			if (m==1 || m==3) { ter[k1-1].style.backgroundColor = "#b7b6b6";}    //блоки дней предшествующего и последующего месяца окрашиваем в серый цвет
 				else {ter[k1-1].style.backgroundColor = "#f8f7f7";}    //блоки дней текущего месяца окрашиваем в белый цвет
-     		if (k==date3.getDate() && m==2 && Month==date3.getMonth() && Year==date3.getFullYear()) { ter[k1-1].style.backgroundColor = "#18c4ed";} //блок соответствующий текущей дате в синий цвет
+     		if (k==date3.getDate() && m==2 && Month==date3.getMonth() && Year==date3.getFullYear()) {
+				ter[k1-1].style.backgroundColor = "#18c4ed";
+			} //блок соответствующий текущей дате в синий цвет
                                 
 			if ( k==days && m==2) { jacheka=k1 ;} // переписываем значение ячейки активного дня
 
@@ -290,9 +292,12 @@ function begin(Year,Month,days,Jcheika){
 }   //************************  окончание ф-ии обновления данных месяца
  
 	//************************  функция обработки клика по ячейкам календаря
-function myClik(){
+myClik = function(e){
+	//e.stopPropagation();
+	const btnPressed = e.target.className;
+	console.log(btnPressed);
 	var ter1 = document.getElementsByClassName('ter');		// выбираем все DIVы с классом ter в объект ter
-	//console.log ("288   ", ter1.length); 
+	console.log ("298   ", this); 
 	ter1[42].style.top = this.style.top;   					// координата по Y. ячейке активности задаем координаты кликнутого дня
 	ter1[42].style.left = this.style.left; 					// координата по X
 	var stattt = document.getElementById('cir2');  
@@ -304,7 +309,7 @@ function myClik(){
 	var num = (y * 7 + x + 1); 								// вычисляем порядковый номер ячейки
 	tablDen(vidcodmed[num][0]); 							// обращение к функции заполнения таблицы записей дня
 	jacheka = num;
-}   //************************  окончание ф-ии обработки клика по ячейкам календаря
+};   //************************  окончание ф-ии обработки клика по ячейкам календаря
  
 	//************************  функция заполнения таблички записей дня
 function tablDen(metkaData){
