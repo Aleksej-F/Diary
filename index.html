@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>diary</title>
+    <link charset="utf-8" rel="stylesheet" type="text/css" href="scripts/smoke/smoke-pure.css" />
+	<link href="fonts/fontawesome-free/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <script type="text/javascript" src="js/common.js"></script>
 </head>
 
 <body>
+    <script type="text/javascript" src="scripts/smoke/smoke-pure.js"></script>
     <div class="wrapper" id="wrapper1">
         <div class="header">
             <div class="header_btn" onclick="myFuncNaz()"></div>
@@ -17,50 +20,49 @@
                 <p class="header_butn" id="p1">Октябрь 2019</p>
             </div>
             <div class="header_btn" onclick="myFuncVper()"></div>
-            
-
         </div>
 
         <div class="hear1">
-            <div class="hear" id="p6">ПН</div>
-            <div class="hear">ВТ</div>
-            <div class="hear">СР</div>
-            <div class="hear">ЧТ</div>
-            <div class="hear">ПТ</div>
-            <div class="hear">СБ</div>
-            <div class="hear">ВС</div>
+            <p class="hear" id="p6">ПН</p>
+            <p class="hear">ВТ</p>
+            <p class="hear">СР</p>
+            <p class="hear">ЧТ</p>
+            <p class="hear">ПТ</p>
+            <p class="hear">СБ</p>
+            <p class="hear">ВС</p>
         </div>
         <div class="hearid" id="board"></div>
-       
-        <div class="tablis" id="p3">
-            <div class="tabli">Время</div>
-            <div class="tabli">Ф.И.О.</div>
-            <div class="tabli">Телефон</div>
-            <div class="tabli">Оплата</div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-            <div class="tabli"><input type="text" class="texti" /></div>
-        </div>
+        <div class="shape">
+            <div class="tablis" id="p3">
+                <div class="tabli">Время</div>
+                <div class="tabli">Ф.И.О.</div>
+                <div class="tabli">Телефон</div>
+                <div class="tabli">Оплата</div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+                <div class="tabli"><input type="text" class="texti" /></div>
+            </div>
 
-        <div class="razdel"> </div>
-        <div class="knopki">
-            <div class="save" onclick="savezapbegin()" id="p4"></div>
-            <div class="delzapden" onclick="delzapbegin()" id="delz"></div>
-            <div class="rashodi" onclick="rashodibegin()" id="rashodi"></div>
-            <div class="statist" onclick="statistik()" id="stat"></div>
+            <div class="razdel"> </div>
+            <div class="block_button">
+                <div class="button" onclick="savezapbegin()" id="p4"></div>
+                <div class="button" onclick="delzapbegin()" id="delz"></div>
+                <div class="button" onclick="rashodibegin()" id="rashodi"></div>
+                <div class="button" onclick="statistik()" id="stat"></div>
+            </div>
         </div>
     </div>
 

@@ -1,0 +1,102 @@
+.smoke-base {
+ position         : fixed;
+ left             : 0%;
+ top              : 0%;
+ width            : 100%;
+ height           : 100%;
+ /*background-color : rgba(0,0,0,0);*/
+ display          : table;
+ z-index          : 1001;
+ transition       : all 1s;
+}
+
+.smoke-base.smoke-base-visible {
+ left              : 0%;
+}
+
+.smoke-black-box {
+ position: fixed;
+ z-index: 800;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background-color : rgba(0,0,0,0.6);
+ /*transition       : all 1s;*/
+}
+
+.smoke-black-box.smoke-black-box-visible {
+ background-color : rgba(0,0,0,.6);
+}
+
+.smoke-dialog_wrapper {
+ z-index: 1500;
+ position       : relative;
+ vertical-align : middle;
+ display        : table-cell;
+}
+
+.smoke-dialog {
+ width            : 90%;
+ margin           : 0 auto;
+ padding          : 20px;
+ color            : #202020;
+ border           : 1px solid #B6B6B6;
+ /*border-radius    : 10px;*/
+ background-color : #f3f3f3;
+ font-family      : Arial;
+ font-size        : 14px;
+ font-weight      : normal;
+ text-align       : center;
+ line-height: 24px;
+}
+
+.smoke-dialog-buttons {
+ vertical-align : middle;
+    margin-top: 10px;
+}
+
+.smoke-dialog-buttons-ok, .smoke-dialog-buttons-cancel {
+    margin: 0 7px;
+    padding: 8px 14px;
+    border: 0;
+    /*border-radius: 5px;*/
+    outline: 0;
+    color: white;
+    background: #00BD20;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: none;
+    line-height: 18px;
+    vertical-align: baseline;
+    display: inline-block;
+    cursor: pointer;
+}
+.smoke-dialog-buttons-ok:hover, .smoke-dialog-buttons-cancel:hover {
+  background: #222;
+}
+
+.smoke-prompt {
+ margin-top : 15px;
+ text-align : center;
+}
+
+.smoke-prompt-input {
+ -moz-box-sizing  : border-box;
+ box-sizing       : border-box;
+ width            : 85%;
+ margin           : 0;
+ padding          : 11.2px;
+ border: none;
+ border-bottom    : 1px solid #aaa;
+ outline          : none;
+ font-family      : arial;
+ font-size        : 12px;
+ background-color : white;
+ display          : inline-block;
+}
+
+.smoke-dialog-buttons-cancel {
+ background-color : rgba(0, 0, 0, .40);
+}

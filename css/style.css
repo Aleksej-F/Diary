@@ -25,13 +25,9 @@ a {
 }
 
 .header {
-  height: 70px;
+  height: 86px;
+  padding-top: 15px;
   background-color: #4bb513;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 20% 60% 20%;
@@ -40,12 +36,14 @@ a {
 
 @media all and (max-width: 600px) {
   .header {
-    height: 50px;
+    height: 59px;
     width: 360px;
+    padding-top: 9px;
   }
 }
 
 .header_btn {
+  /* кнопки навигации в заголовке */
   width: 70px;
   height: 70px;
   background-size: cover;
@@ -55,10 +53,12 @@ a {
 }
 
 .header_btn:nth-child(1) {
+  /* кнопка назад */
   background-image: url("../img/Go1.png");
 }
 
 .header_btn:nth-child(3) {
+  /* кнопка вперед */
   background-image: url("../img/Go2.png");
 }
 
@@ -103,6 +103,7 @@ a {
 }
 
 .hearid {
+  /*  блок календаря */
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.3%;
@@ -120,7 +121,7 @@ a {
 }
 
 .ter {
-  /*  ячейка календаря*/
+  /*  ячейка календаря */
   border: 1px #c7c5c5 solid;
   text-align: center;
   padding: 0;
@@ -137,7 +138,7 @@ a {
 }
 
 .cir {
-  /*ячейка количества записей в день*/
+  /* ячейка количества записей в день */
   display: block;
   border-radius: 50%;
   /*background-color: #ed2110;*/
@@ -160,7 +161,7 @@ a {
 }
 
 .cir1 {
-  /* активная ячейка*/
+  /* начальные праметры активной ячейки */
   position: absolute;
   display: block;
   top: 0;
@@ -168,24 +169,23 @@ a {
   border-radius: 45px;
   z-index: 10;
   opacity: 0;
-  /* transition: height 500ms, width 500ms;*/
 }
 
 .cir2 {
-  /* активная ячейка*/
+  /* конечнвые параметры активной ячейки */
   width: 94%;
   height: 94%;
   opacity: 1;
 }
 
 .cir3 {
+  /* для анимации появления кружка активного дня */
   -webkit-animation: nev 100ms linear normal;
           animation: nev 100ms linear normal;
 }
 
-/* применяется анимация nev */
 @-webkit-keyframes nev {
-  /*анимация появления кружка активного дня*/
+  /* анимация появления кружка активного дня */
   from {
     /* От */
     width: 10%;
@@ -203,8 +203,9 @@ a {
     margin-left: 3px;
   }
 }
+
 @keyframes nev {
-  /*анимация появления кружка активного дня*/
+  /* анимация появления кружка активного дня */
   from {
     /* От */
     width: 10%;
@@ -224,6 +225,7 @@ a {
 }
 
 .razdel {
+  /*  разделительная полоса */
   position: relative;
   height: 3px;
   width: 560px;
@@ -231,7 +233,7 @@ a {
 }
 
 .tablis {
-  /*таблица отображения записей в выбранный день*/
+  /* таблица отображения записей в выбранный день */
   width: 100%;
   display: -ms-grid;
   display: grid;
@@ -249,11 +251,9 @@ a {
   padding: 0 2px 0 2px;
 }
 
-.knopki {
-  /*окно расположения кнопок*/
+.block_button {
+  /* блок расположения кнопок */
   height: 75px;
-  font-size: 30px;
-  font-weight: 600;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -264,46 +264,32 @@ a {
           align-items: center;
 }
 
-.save {
+.button {
+  /*  параметры кнопок */
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.button:nth-child(1) {
   /* кнопка сохранить записи в день*/
-  width: 70px;
-  height: 70px;
   background-image: url("../img/save.png");
-  background-size: cover;
-  cursor: pointer;
 }
 
-.delzapden {
+.button:nth-child(2) {
   /* кнопка удалить запись*/
-  width: 70px;
-  height: 70px;
   background-image: url("../img/Dell.png");
-  background-size: cover;
-  cursor: pointer;
 }
 
-.rashodi {
+.button:nth-child(3) {
   /* кнопка активации окна расходов*/
-  width: 70px;
-  height: 70px;
   background-image: url("../img/rash.png");
-  background-size: cover;
-  cursor: pointer;
-  text-align: center;
-  border-radius: 10px;
-  line-height: 65px;
 }
 
-.statist {
+.button:nth-child(4) {
   /* кнопка активации окна статистики*/
-  width: 70px;
-  height: 70px;
   background-image: url("../img/stat1.png");
-  background-size: cover;
-  cursor: pointer;
-  text-align: center;
-  line-height: 65px;
-  border-radius: 10px;
 }
 
 .terin {
@@ -367,8 +353,8 @@ a {
   padding: 10px;
   width: 40px;
   height: 20px;
-  top: 15px;
-  right: 18px;
+  top: 20px;
+  right: 0px;
   cursor: pointer;
 }
 
@@ -382,6 +368,12 @@ a {
   text-align: center;
   /*background-color: #13b577;*/
   font-size: 35px;
+}
+
+@media all and (max-width: 600px) {
+  #jarstatist {
+    padding-top: 5px;
+  }
 }
 
 .stattablis {
@@ -401,5 +393,12 @@ a {
   border-style: solid;
   border-width: 1px;
   border-color: #b1b5b4;
+}
+
+@media all and (max-width: 600px) {
+  .stattabl {
+    font-size: 15px;
+    line-height: 22px;
+  }
 }
 /*# sourceMappingURL=style.css.map */

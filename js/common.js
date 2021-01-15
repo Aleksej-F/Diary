@@ -51,17 +51,22 @@ function getLastDayOfMonth(year, month){
 }
 	//****************** ф-ия формирования формы при активации документа
 window.onload = function () {
+	let cul=1;
+	
  	const board = document.getElementById('board');
 	const stattabli = document.getElementById('stattabli');
 	for (n=0; n<=5; n++) {                  		  	  // цикл на кол-во строк для формирования таблицы месяца   
 		for (i=0; i<=6; i++) {	             		  	  // цикл на кол-во столбцов(дней в неделе) для формирования таблицы месяца
         	let cell = document.createElement('div');     // создаем DIV в переменную cell
         	cell.className = 'ter';                       // устанавливаем этому DIV класс ter
-       		board.appendChild(cell);                      // добавляем в DIV board созданную клетку!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        	cell.addEventListener('click',myClik, false); // вешаем событие click на созданную клетку, при клике вызываем функцию myClik()
+			cell.setAttribute('data', cul);   
+			board.appendChild(cell);                      // добавляем в DIV board созданную клетку
+			   
+			cell.addEventListener('click', myClik, false); // вешаем событие click на созданную клетку, при клике вызываем функцию myClik()
+			cul +=1;
         } // цикл i
    	} // цикл n
-            
+	  
 	for (n=0; n<=64; n++) { 
 		let stat = document.createElement('div');       // создаем DIV в переменную stat
 		stat.className = 'stattabl';                    // устанавливаем этому DIV класс
@@ -112,10 +117,15 @@ function savezapbegin(){
      	} // nn
     	if (zpr>0) {obj.item1[0]++;}   // сохраняем в объект признах наличия(колличество) записей в столбцах - строки
     	zpr=0;
-   	} // ii
+	   } // ii
+	   savelocalStorage(obj);
+}
 
-  	    //  сохраняем объект
-  	var serialObj = JSON.stringify(obj);         // сериализуем  объект
+	//************************  ф-ия сохранения записи
+function savelocalStorage(xxx){	   
+	let job = xxx; 
+	//  сохраняем объект
+  	let serialObj = JSON.stringify(xxx);         // сериализуем  объект
     		
 	try {	
 		localStorage.setItem(vidcodmed[jacheka][0], serialObj); // запишем его в хранилище по ключу "jacheka"
@@ -126,7 +136,7 @@ function savezapbegin(){
 		}
 	}
 
-	if (obj.item1[0]===0) {localStorage.removeItem(vidcodmed[jacheka][0]);}
+	if (xxx.item1[0]===0) {localStorage.removeItem(vidcodmed[jacheka][0]);}
 
 	var date2 = new Date(
 		vidcodmed[jacheka][1],
@@ -138,18 +148,47 @@ function savezapbegin(){
       
 }   //************************  окончание ф-ия сохранения записи 
 
-	//************************  ф-ия удаления записи
+	//************************  ф-ия удаления записей в указанный день
 function delzapbegin(){
-}   //************************  окончание ф-ии удаления записи
-//************************  ф-ия удаления записи
+	let dayZap = vidcodmed[jacheka][0];
+	let returnObj = JSON.parse(localStorage.getItem(dayZap)); //спарсим в объект значение по ключу даты   
+	let obj = {                 	  // создаем объек - пустую запись дня
+		item1: [0,0],             	  // колличество записей(строк) в таблице(день)
+	   	item2: [['',"","",""],['',"","",""],['',"","",""],['',"","",""]]
+	};
+	if (returnObj!=null) {
+		//if (confirm('Удалить записи?')) {}
+		
+
+							
+				smoke.ok = 'Да';
+				smoke.cancel = 'Нет'
+				smoke.confirm("Удалить записи?",
+					function (result) {
+						//Выбрана отмена. Вызываем диалог "Введите имя сохранения"
+						if (result === false) {
+							return;
+						}
+						savelocalStorage(obj);	// нажал "Да" 
+						
+					})
+			
+		
+
+
+
+
+	}
+}   //************************  окончание ф-ии удаления записей в указанный день
+//************************  ф-ия открытия окна расходов
 function rashodibegin(){
-}   //************************  окончание ф-ии удаления записи
+}   //************************  окончание ф-ии открытия окна расходов
 
 	//************************  ф-ия клика по значку статисти
 function statistik(){
 	document.getElementById("wrapper1").style.display='none';            // скрываем окно календаря
 	document.getElementById("oknostatist1").style.display='block';       // отображаем окно статистики
-	statistikOkno(date1.getFullYear());            // обращаемся к функции для отображения статистики
+	statistikOkno(date1.getFullYear());            // обращаемся к функции для формирования данных статистики
 }   //************************  окончание ф-ии клика по значку статисти 
 
 	//************************  ф-ия  клик по стрелке назад на окне статистики
@@ -208,7 +247,7 @@ function zakrstatistik(){
 }   //************************  окончание ф-ии закрытия окна  статистики
 
 	//************************  ф-ия  обновления данных месяца
-function begin(Year,Month,days,Jcheika){
+function begin(Year,Month,days,Jcheika) {
 	
 	var ter = document.getElementsByClassName('ter'); // выбираем все DIVы с классом ter в объект ter
 	var cir = document.getElementsByClassName('cir'); // выбираем все DIVы с классом cir в объект cir
@@ -289,7 +328,7 @@ function begin(Year,Month,days,Jcheika){
 }   //************************  окончание ф-ии обновления данных месяца
  
 	//************************  функция обработки клика по ячейкам календаря
-myClik = function(e){
+/*myClik = function(e) {
 	//e.stopPropagation();
 	const cir2 = document.getElementsByClassName('cir2');	
 	if	(cir2.length != 0){
@@ -303,20 +342,39 @@ myClik = function(e){
 	let tegi = this.parentElement; // определяем родительский элемент
 	for (let i = 0; i < tegi.children.length; i++) {
 		if ( tegi.children[i] == this ) {
-			jacheka = i + 1; 
+			jacheka = i+1; 
 			break;
 		}   // определяем номер кликнутого элемента
 	}
 	tablDen(vidcodmed[jacheka][0]); // обращение к функции заполнения таблицы записей дня
 	//jacheka = num;
+	console.log(this);
+};   //************************  окончание ф-ии обработки клика по ячейкам календаря
+*/
+//************************  альтернативный  клик по ячейкам календаря
+myClik = function (e) {
+	//e.stopPropagation();
+	const cir2 = document.getElementsByClassName('cir2');	
+	if	(cir2.length != 0){
+		cir2[0].classList.remove('cir2'); 
+	}  // удаляем круг на старом месте
+		
+	this.children[0].classList.add ('cir3');            // устанавливаем этому DIV класс 'cir3' для анимации активного дня
+	setTimeout(() => this.children[0].classList.remove('cir3'), 200);	// удаляем класс, для повтора анимации
+	this.children[0].classList.add ('cir2');            // устанавливаем класс 'cir2', для фиксации круга-подсведки
+				
+	jacheka = this.getAttribute('data');
+
+	tablDen(vidcodmed[jacheka][0]); // обращение к функции заполнения таблицы записей дня
+	//jacheka = num;
 	console.log(jacheka);
 };   //************************  окончание ф-ии обработки клика по ячейкам календаря
- 
+
 	//************************  функция заполнения таблички записей дня
 function tablDen(metkaData){
-	var returnObj = JSON.parse(localStorage.getItem(metkaData)); //спарсим в объект значение по ключу даты   
-	var z = 0;
-	var ter1 = document.getElementsByClassName('texti'); // выбираем все DIVы с классом texti в объект ter1     
+	let returnObj = JSON.parse(localStorage.getItem(metkaData)); //спарсим в объект значение по ключу даты   
+	let zz = 0;
+	let ter1 = document.getElementsByClassName('texti'); // выбираем все DIVы с классом texti в объект ter1     
 	if (returnObj===null) {
 		//console.log ("246   очищаем таблицу");
 		for (ii=0; ii<16; ii++) {
@@ -327,9 +385,10 @@ function tablDen(metkaData){
    		//console.log ("252   заполняем таблицу записями");
 		for (ii=0; ii<returnObj.item2.length; ii++) {
 			for (nn=0; nn<=3; nn++) {
-				ter1[z].value = returnObj.item2[ii][nn];   // выводим 
-				z++;
+				ter1[zz].value = returnObj.item2[ii][nn];   // выводим 
+				zz++;
 			 } // nn
 		} // ii
 	} // else
 }   //************************  окончание ф-ии заполнения таблички записей дня  
+
