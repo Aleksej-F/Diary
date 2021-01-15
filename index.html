@@ -12,11 +12,12 @@
 <body>
     <div class="wrapper" id="wrapper1">
         <div class="header">
-            <div class="btn" onclick="myFuncNaz()"></div>
-            <div class="btn" onclick="myFuncVper()"></div>
+            <div class="header_btn" onclick="myFuncNaz()"></div>
             <div>
-                <p class="butn" id="p1">Октябрь 2019</p>
+                <p class="header_butn" id="p1">Октябрь 2019</p>
             </div>
+            <div class="header_btn" onclick="myFuncVper()"></div>
+            
 
         </div>
 
@@ -29,9 +30,8 @@
             <div class="hear">СБ</div>
             <div class="hear">ВС</div>
         </div>
-        <div class="hearid" id="board"> </div>
-        <div class="razdel"> </div>
-
+        <div class="hearid" id="board"></div>
+       
         <div class="tablis" id="p3">
             <div class="tabli">Время</div>
             <div class="tabli">Ф.И.О.</div>
@@ -65,13 +65,20 @@
     </div>
 
     <div class="oknostatist" id="oknostatist1">
-        <div onclick="zakrstatistik()" id="zakrstat">Х</div>
-        <div class="statistzagl">
-            <div class="btn1" onclick="myFuncNazJar()"></div>
-            <div id="jarstatist"> год</div>
-            <div class="btn2" onclick="myFuncVperJar()"></div>
+        <div class="oknostatist_zakrstat">
+            <div onclick="zakrstatistik()" id="zakrstat">
+                <div class="oknostatist_zakr"></div>
+                <div class="oknostatist_zakr"></div>
+            </div>
         </div>
-        <div class="stattablis" id="stattabli">
+        <div class="header statistzagl">
+            <div class="header_btn" onclick="myFuncNazJar()"></div>
+            <div>
+                <p class="header_butn" id="jarstatist">год</p>
+            </div>
+            <div class="header_btn" onclick="myFuncVperJar()"></div>
+        </div>
+        <div class="stattablis " id="stattabli">
             <div class="stattabl">Месяц</div>
             <div class="stattabl">Сумма</div>
             <div class="stattabl">Кол-во</div>

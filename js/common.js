@@ -51,33 +51,23 @@ function getLastDayOfMonth(year, month){
 }
 	//****************** ф-ия формирования формы при активации документа
 window.onload = function () {
- 	var k1 = 0;                              			  // счетчик общего кол-ва ячеек в таблице месяца
-	const board = document.getElementById('board');
+ 	const board = document.getElementById('board');
 	const stattabli = document.getElementById('stattabli');
 	for (n=0; n<=5; n++) {                  		  	  // цикл на кол-во строк для формирования таблицы месяца   
 		for (i=0; i<=6; i++) {	             		  	  // цикл на кол-во столбцов(дней в неделе) для формирования таблицы месяца
-        	k1++;                             			  // увеличиваем счетчик ячеек
-        	var cell = document.createElement('div');     // создаем DIV в переменную cell
+        	let cell = document.createElement('div');     // создаем DIV в переменную cell
         	cell.className = 'ter';                       // устанавливаем этому DIV класс ter
-       		cell.innerHTML = "<div class='cir'></div>";   // значение блоку DIV блок отображения количества записей 
-        	board.appendChild(cell);                      // добавляем в DIV board созданную клетку!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+       		board.appendChild(cell);                      // добавляем в DIV board созданную клетку!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         	cell.addEventListener('click',myClik, false); // вешаем событие click на созданную клетку, при клике вызываем функцию myClik()
         } // цикл i
    	} // цикл n
             
 	for (n=0; n<=64; n++) { 
-		var stat = document.createElement('div');       // создаем DIV в переменную stat
+		let stat = document.createElement('div');       // создаем DIV в переменную stat
 		stat.className = 'stattabl';                    // устанавливаем этому DIV класс
 		stattabli.appendChild(stat);                    // добавляем в DIV stattabli созданную 
 	} // цикл n
 			
-	//***создаем еще один блок он будет подсвечивать активную ячейку
-	cell = document.createElement('div'); 		 // создаем DIV в переменную cell
-	cell.className = 'ter';              		 // устанавливаем этому DIV класс ter
-	cell.classList.add('cir1');          		 // добавляем клетке класс  cir1
-	cell.innerHTML = "<div id='cir2'></div>"; 	 // значение блоку DIV блок отображения количества записей 
-	board.appendChild(cell);              		 // добавляем в DIV board созданную клетку!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
 	begin(date1.getFullYear(),date1.getMonth(),date1.getDate(),jacheka);  // обращаемся к фун-ии для заполнения месяца данными
 }; 	// окончание функции формирования формы при активации документа 
 
@@ -104,27 +94,27 @@ function myFuncVper(){
 	//************************  ф-ия сохранения записи
 function savezapbegin(){
   	var ter1 = document.getElementsByClassName('texti'); // выбираем все DIVы с классом texti в объект ter1
-  	var z=0;                     // счетчик ячеек таблицы
-  	var zpr=0;                   // счетчик непустых ячеек в строке
-  	var obj = {                  // создаем объек - пустую запись дня
-	 	item1: [0,0],               // колличество записей(строк) в таблице(день)
-		item2: [['', "", "",""],['', "", "",""],['', "", "",""],['', "", "",""]]
+  	var counterCellTable=0;                   		  // счетчик ячеек таблицы
+  	var zpr=0;                 		  // счетчик непустых ячеек в строке
+  	var obj = {                 	  // создаем объек - пустую запись дня
+	 	item1: [0,0],             	  // колличество записей(строк) в таблице(день)
+		item2: [['',"","",""],['',"","",""],['',"","",""],['',"","",""]]
 	};
   		
-        for (ii=0; ii<=3; ii++) {
-   			for (nn=0; nn<=3; nn++) {
-      			if ((ter1[z].value) !== '') {           // если в ячейки есть запись
-        			obj.item2[ii][nn] = ter1[z].value;   // сохраняем в объект данные из таблицы
-        			zpr++;
-        			if (nn == 3)  {obj.item1[1]++;}       // счетчик по количеству оплаченных записей в день
-       			}
-      			z++;
-     		} // nn
-    		if (zpr>0) {obj.item1[0]++;}                // сохраняем в объект признах наличия(колличество) записей в столбцах - строки
-    		zpr=0;
-   		} // ii
+    for (ii=0; ii<=3; ii++) {
+   		for (nn=0; nn<=3; nn++) {
+      		if ((ter1[counterCellTable].value) !== '') {         	  // если в ячейки есть запись
+        		obj.item2[ii][nn] = ter1[counterCellTable].value;    // сохраняем в объект данные из таблицы
+        		zpr++;
+        		if (nn == 3)  {obj.item1[1]++;}       // счетчик по количеству оплаченных записей в день
+       		}
+			   counterCellTable++;
+     	} // nn
+    	if (zpr>0) {obj.item1[0]++;}   // сохраняем в объект признах наличия(колличество) записей в столбцах - строки
+    	zpr=0;
+   	} // ii
 
-  			//      //  сохраняем объект
+  	    //  сохраняем объект
   	var serialObj = JSON.stringify(obj);         // сериализуем  объект
     		
 	try {	
@@ -135,14 +125,24 @@ function savezapbegin(){
 			alert('Превышен лимит памяти');
 		}
 	}
+
 	if (obj.item1[0]===0) {localStorage.removeItem(vidcodmed[jacheka][0]);}
-	var date2 = new Date(vidcodmed[jacheka][1],vidcodmed[1][2],vidcodmed[jacheka][3]);  // переопределяем месяц с минусом в месяц
+
+	var date2 = new Date(
+		vidcodmed[jacheka][1],
+		vidcodmed[1][2],
+		vidcodmed[jacheka][3]
+	);  // устанавливаем день кликнутой ячейчи
+	
 	begin(date2.getFullYear(),date2.getMonth(),date2.getDate(),jacheka);     // обращение к ф-ии для обновления данных месяца
       
 }   //************************  окончание ф-ия сохранения записи 
 
 	//************************  ф-ия удаления записи
 function delzapbegin(){
+}   //************************  окончание ф-ии удаления записи
+//************************  ф-ия удаления записи
+function rashodibegin(){
 }   //************************  окончание ф-ии удаления записи
 
 	//************************  ф-ия клика по значку статисти
@@ -209,84 +209,81 @@ function zakrstatistik(){
 
 	//************************  ф-ия  обновления данных месяца
 function begin(Year,Month,days,Jcheika){
-	var blok = document.getElementById('p6');
-	cellWidth = blok.offsetWidth;            // задаем ширину ячеек календаря
-	cellHeight = blok.offsetWidth;           // задаем высоту ячеек календаря
+	
 	var ter = document.getElementsByClassName('ter'); // выбираем все DIVы с классом ter в объект ter
 	var cir = document.getElementsByClassName('cir'); // выбираем все DIVы с классом cir в объект cir
-	var c = 0; // счетчик DIVов с классом cir
+	var counterCir = 0; // счетчик DIVов с классом cir
 	var date3 = new Date();             // текущая дата 
 	date1 = new Date(Year,Month,days);  // устанавливаем дату для заполнения календаря
 	var date = new Date(date1.getFullYear(),date1.getMonth(),1);    // дата для определения смещения от первого числа
 	var kodmet ='p'+ Year+''+monthNN[Month]+''+days; //формируем ключ по дате
 	p1.innerHTML = monthN[Month] +' '+Year;   // выводим текущий месяц и год
 	var k3 = 0;  // отношение оплата к колличеству записей  в день 
-	var k2 = 0;  // переменная колличества записей в день   
-	var k1 = 0;  // счетчик ячеек
-	var m = 1;   // признак смены месяца, меняем цвет ячейки
+	var recordsDay = 0;  // переменная колличества записей в день   
+	var counterCell = 0;  // счетчик ячеек
+	var monthEnd = 1;   // признак смены месяца, меняем цвет ячейки
 	var perd = getDateAgo(date, smech[date.getDay()]); // смещение даты для заполнения первой строки
-	var k = perd-1; // счетчик дней
-	var d = getLastDayOfMonth(date.getFullYear(), date.getMonth());    // последний день месяца
+	var counterDay = perd-1; // счетчик дней
+	var lastDayMonth = getLastDayOfMonth(date.getFullYear(), date.getMonth());    // последний день месяца
 	var d1 = getLastDayOfMonth(date.getFullYear(), date.getMonth()-1); // последний день предыдущего месяца
         
-  	if (perd==1) {d1 = d; m = 2;}
+  	if (perd==1) {d1 = lastDayMonth; monthEnd = 2;}
     
   	for (n=0; n<=5; n++) {
 		for (i=0; i<=6; i++) {	            
-			ter[k1].style.top = (n*(cellHeight)) + 'px';   // задаем координата по Y
-			ter[k1].style.left = (i*(cellWidth)) + 'px';   // задаем координата по X
-			k++; k1++;
-			if (k > d1) { k=1; m=m+1; d1=d; } 			   // k достигает последнего дня месяца
-			kodmet ='p'+ Year+''+monthNN[Month+m-2]+''+k;  // формируем ключ - дату
-			vidcodmed[k1]=[kodmet,Year,Month+m-1,k];       // записываем в массив ключ - дату
+			
+			counterDay++; counterCell++;
+			if (counterDay > d1) { counterDay=1; monthEnd = monthEnd + 1; d1 = lastDayMonth; } 			   // k достигает последнего дня месяца
+			kodmet ='p' + Year + '' + monthNN[Month + monthEnd - 2] + '' + counterDay;  // формируем ключ - дату
+			vidcodmed[counterCell]=[kodmet,Year,Month + monthEnd - 1,counterDay];       // записываем в массив ключ - дату
 			var returnObj = JSON.parse(localStorage.getItem(kodmet)); // спарсим в объект значение по ключу даты
-			if (returnObj===null) {k2 = 0;}   		// задаем колличество записей в день по значению returnObj.item1
-        		else { k2 = returnObj.item1[0];}
+			if (returnObj===null) {recordsDay = 0;}   		// задаем колличество записей в день по значению returnObj.item1
+        		else { recordsDay = returnObj.item1[0];}
              
-			if (k2 > 0) { 
-				ter[k1-1].innerHTML = k+ "<div class='cir'>" +k2+ "</div>";
-				k3 = returnObj.item1[1] / k2;
+			if (recordsDay > 0) { 
+				ter[counterCell-1].innerHTML = counterDay + "<div class='cir1'></div>" + "<div class='cir'>" + recordsDay + "</div>";
+				k3 = returnObj.item1[1] / recordsDay;
 				switch (k3) {
 					case 0:
-						cir[c].style.backgroundColor = "#f70f0f";
+						cir[counterCir].style.backgroundColor = "#f70f0f";
 						break;
 					case (1/4):
-						cir[c].style.backgroundColor = "#faed52";
+						cir[counterCir].style.backgroundColor = "#faed52";
 						break;
 					case (1/3):
-						cir[c].style.backgroundColor = "#faed52";
+						cir[counterCir].style.backgroundColor = "#faed52";
 						break;             
 					case (1/2):
-						cir[c].style.backgroundColor = "#63c944";
+						cir[counterCir].style.backgroundColor = "#63c944";
 						break;
 					case (2/3):
-						cir[c].style.backgroundColor = "#64d0a6";
+						cir[counterCir].style.backgroundColor = "#64d0a6";
 						break;
 					case (3/4):
-						cir[c].style.backgroundColor = "#64d0a6";
+						cir[counterCir].style.backgroundColor = "#64d0a6";
 						break;             
 					case 1:
-						cir[c].style.backgroundColor = "#6559f7";
+						cir[counterCir].style.backgroundColor = "#6559f7";
             	} 
-         		c++; 
+				counterCir++; 
         	}// добавляем красный кружок в нем прописываем количество записей в день
-				else { ter[k1-1].innerHTML = k; }            // нет записей в день. прописываем число-дату
+				else { ter[counterCell-1].innerHTML = counterDay + "<div class='cir1'></div>"; }            // нет записей в день. прописываем число-дату
                 
-			if (m==1 || m==3) { ter[k1-1].style.backgroundColor = "#b7b6b6";}    //блоки дней предшествующего и последующего месяца окрашиваем в серый цвет
-				else {ter[k1-1].style.backgroundColor = "#f8f7f7";}    //блоки дней текущего месяца окрашиваем в белый цвет
-     		if (k==date3.getDate() && m==2 && Month==date3.getMonth() && Year==date3.getFullYear()) {
-				ter[k1-1].style.backgroundColor = "#18c4ed";
+			if (monthEnd==1 || monthEnd==3) { ter[counterCell-1].style.backgroundColor = "#b7b6b6";}    //блоки дней предшествующего и последующего месяца окрашиваем в серый цвет
+				else {ter[counterCell-1].style.backgroundColor = "#f8f7f7";}    //блоки дней текущего месяца окрашиваем в белый цвет
+     		if (counterDay==date3.getDate() && monthEnd==2 && Month==date3.getMonth() && Year==date3.getFullYear()) {
+				ter[counterCell-1].style.backgroundColor = "#18c4ed";
 			} //блок соответствующий текущей дате в синий цвет
                                 
-			if ( k==days && m==2) { jacheka=k1 ;} // переписываем значение ячейки активного дня
+			if ( counterDay==days && monthEnd==2) { jacheka=counterCell ;} // переписываем значение ячейки активного дня
 
-			if (k1==Jcheika) {   // если обращение к функции заполнения таблицы
-        		ter[42].style.top = n*cellHeight+"px"; // координата по Y
-        		ter[42].style.left = i*cellWidth+"px"; // по X
-        		tablDen(vidcodmed[k1][0]);  //обращение к функции для заполения талицы записей
+			if (counterCell==Jcheika) {   // если обращение к функции заполнения таблицы
+				ter[counterCell-1].children[0].classList.add ('cir2');
+				
+        		tablDen(vidcodmed[counterCell][0]);  //обращение к функции для заполения талицы записей
         	}
 		}  // цикл  i
-    	ter[k1-1].style.color = "#ed2110";  // каждому 7-му блоку устанавливаем цвет шрифта - красный    
+    	ter[counterCell-1].style.color = "#ed2110";  // каждому 7-му блоку устанавливаем цвет шрифта - красный    
 	}   // цикл n
    
 }   //************************  окончание ф-ии обновления данных месяца
@@ -294,21 +291,25 @@ function begin(Year,Month,days,Jcheika){
 	//************************  функция обработки клика по ячейкам календаря
 myClik = function(e){
 	//e.stopPropagation();
-	const btnPressed = e.target.className;
-	console.log(btnPressed);
-	var ter1 = document.getElementsByClassName('ter');		// выбираем все DIVы с классом ter в объект ter
-	console.log ("298   ", this); 
-	ter1[42].style.top = this.style.top;   					// координата по Y. ячейке активности задаем координаты кликнутого дня
-	ter1[42].style.left = this.style.left; 					// координата по X
-	var stattt = document.getElementById('cir2');  
-	stattt.className = 'cir3';                  			// устанавливаем этому DIV класс 'cir3' для анимации активного дня
-	setTimeout(() => stattt.classList.remove('cir3'), 200);	// удаляем класс, для повтора анимации
- 	// вычисляем порядковый номер кликнутой ячейки
-	var x = Number.parseInt(this.style.left)/(cellWidth); 
-	var y = Number.parseInt(this.style.top)/(cellHeight);
-	var num = (y * 7 + x + 1); 								// вычисляем порядковый номер ячейки
-	tablDen(vidcodmed[num][0]); 							// обращение к функции заполнения таблицы записей дня
-	jacheka = num;
+	const cir2 = document.getElementsByClassName('cir2');	
+	if	(cir2.length != 0){
+		cir2[0].classList.remove('cir2'); 
+	}  // удаляем круг на старом месте
+	
+	this.children[0].classList.add ('cir3');            // устанавливаем этому DIV класс 'cir3' для анимации активного дня
+	setTimeout(() => this.children[0].classList.remove('cir3'), 200);	// удаляем класс, для повтора анимации
+	this.children[0].classList.add ('cir2');            // устанавливаем класс 'cir2', для фиксации круга-подсведки
+		
+	let tegi = this.parentElement; // определяем родительский элемент
+	for (let i = 0; i < tegi.children.length; i++) {
+		if ( tegi.children[i] == this ) {
+			jacheka = i + 1; 
+			break;
+		}   // определяем номер кликнутого элемента
+	}
+	tablDen(vidcodmed[jacheka][0]); // обращение к функции заполнения таблицы записей дня
+	//jacheka = num;
+	console.log(jacheka);
 };   //************************  окончание ф-ии обработки клика по ячейкам календаря
  
 	//************************  функция заполнения таблички записей дня
