@@ -121,7 +121,7 @@ function savezapbegin(){
 	   savelocalStorage(obj);
 }
 
-	//************************  ф-ия сохранения записи
+	//************************  ф-ия записи в localStorage
 function savelocalStorage(xxx){	   
 	let job = xxx; 
 	//  сохраняем объект
