@@ -1,0 +1,281 @@
+$brec-point1: 600px;
+$brec-point2: 360px;
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+a {
+    margin: 0;
+    font-size: 100%;
+    font-weight: normal;
+}
+.wrapper {
+    width: 560px;
+    margin: 0 auto auto auto;
+    background-color: rgb(243, 247, 247);
+    @media all and (max-width: $brec-point1) {
+        width: 360px;
+        height: 600px;
+    }
+}
+.header {       
+    height: 86px;
+    padding-top: 15px;
+    background-color: #4bb513;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    @media all and (max-width: $brec-point1) {
+        height: 59px;
+        width: 360px;
+        padding-top: 9px;
+    }
+    &_btn {     /* кнопки навигации в заголовке */
+        width: 70px;
+        height: 70px;
+        background-size: cover;
+        margin: 0 auto;
+        border-radius: 10px;
+        cursor: pointer;
+        &:nth-child(1) {  /* кнопка назад */
+            background-image: url('../img/Go1.png');
+        }
+        &:nth-child(3) {    /* кнопка вперед */
+            background-image: url('../img/Go2.png');
+        }
+        @media all and (max-width: $brec-point1) {
+            width: 50px;
+            height: 50px;
+        }
+    }
+    &_butn {
+        padding-top: 15px;
+        text-align: center;
+        font-size: 35px;
+        @media all and (max-width: $brec-point1) {
+            font-size: 20px;
+        }
+    }
+
+}
+.hear1 {
+    display: grid;
+    grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.3%;
+    grid-template-rows: 40px;
+    width: 100%;
+    background-color: #e0dddd;
+    text-align: center;
+    
+}
+.hear {
+    margin-top: 10px;
+    text-align: center;
+    padding: 0;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 24px;
+}
+.hearid {    /*  блок календаря */
+    display: grid;
+    grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.3%;
+    grid-template-rows: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3%;
+    height: 560px;
+    width: 100%;
+    @media all and (max-width: $brec-point1) {
+        height: 360px;
+    }
+}
+.ter {    /*  ячейка календаря */
+    border: 1px #c7c5c5 solid;
+    text-align: center;
+    padding: 0;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 24px;
+    position: relative;
+    @media all and (max-width: $brec-point1) {
+        font-size: 20px;
+    }
+}
+.cir {    /* ячейка количества записей в день */
+    display: block;
+    border-radius: 50%;
+    /*background-color: #ed2110;*/
+    font-size: 20px;
+    width: 30%;
+    height: 30%;
+    text-align: center;
+    margin: 15px auto auto;
+    color: #0f0e0e;
+    @media all and (max-width: $brec-point1) {
+        width: 35%;
+        height: 35%;
+        margin-top: 5px;
+        font-size: 16px;
+        line-height: 15px;
+    }
+}
+.cir1 {    /* начальные праметры активной ячейки */
+    position: absolute;
+    display: block;
+    top: 0;
+    border: 2px #278d4e solid;
+    border-radius: 45px;
+    z-index: 10;
+    opacity: 0;
+}
+.cir2 {     /* конечнвые параметры активной ячейки */
+    width: 94%;
+    height: 94%;
+    opacity: 1;
+}
+.cir3 {     /* для анимации появления кружка активного дня */
+    animation: nev 100ms linear normal;
+}
+@keyframes nev {    /* анимация появления кружка активного дня */
+    from {
+        /* От */
+        width: 10%;
+        height: 10%;
+        margin-top: 45%;
+        margin-left: 45%;
+    }
+
+    to {
+        /* До */
+        opacity: 1;
+        /* полная непрозрачность */
+        width: 94%;
+        height: 94%;
+        margin-top: 3px;
+        margin-left: 3px;
+    }
+}
+.razdel {    /*  разделительная полоса */
+    position: relative;
+    height: 3px;
+    width: 560px;
+    margin: 2px;
+}
+.tablis {    /* таблица отображения записей в выбранный день */
+    width: 100%;
+    display: grid;
+    grid-template-columns: 13% 44% 25% 15%;
+    grid-template-rows: 20px 20px 20px 20px 20px;
+    grid-column-gap: 3px;
+    grid-row-gap: 3px;
+    text-align: center;
+    
+}
+.texti {
+    width: 99%;
+    padding: 0 2px 0 2px;
+}
+.block_button {    /* блок расположения кнопок */
+    height: 75px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.button{     /*  параметры кнопок */
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    cursor: pointer;
+    &:nth-child(1) {    /* кнопка сохранить записи в день*/
+        background-image: url('../img/save.png');
+    }
+    &:nth-child(2) {    /* кнопка удалить запись*/
+        background-image: url('../img/Dell.png');
+    }
+    &:nth-child(3) {    /* кнопка активации окна расходов*/
+        background-image: url('../img/rash.png');
+    }
+    &:nth-child(4) {    /* кнопка активации окна статистики*/
+        background-image: url('../img/stat1.png');
+    }
+
+}
+.terin {
+    padding: 0;
+    margin: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 24px;
+}
+.active {
+    background-color: rgb(199, 216, 68);
+}
+.oknostatist {
+    position: relative;
+    width: 560px;
+    height: 780px;
+    margin: 0 auto auto auto;
+    display: none;
+    background-color: #4bb513;
+    @media all and (max-width: $brec-point1) {
+        font-size: 20px;
+        width: 360px;
+    }
+    &_zakrstat{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    &_zakr{
+        width: 37px;
+        height: 4px;
+        background-color: #0f0e0e;
+        position: absolute;
+        &:nth-child(1) {
+            transform: rotate(45deg);
+            top: 9px;
+        }
+        &:nth-child(2) {
+            transform: rotate(-45deg);
+        }
+        
+    }
+}
+#zakrstat {
+    position: relative;
+    padding: 10px;
+    width: 40px;
+    height: 20px;
+    top: 20px;
+    right: 0px;
+    cursor: pointer;
+}
+.statistzagl {
+    margin-top: 30px;
+    background-color: rgba(11, 239, 239, 0);
+}
+#jarstatist {
+    padding: auto;
+    text-align: center;
+    /*background-color: #13b577;*/
+    font-size: 35px;
+    @media all and (max-width: $brec-point1) {
+       padding-top: 5px;
+    }
+}
+.stattablis {
+    margin: 30px auto auto auto;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 25px 25px 25px 25px 25px 25px 25px 25px 25px 25px 25px 25px 25px;
+    background-color: rgb(144, 224, 244);
+    text-align: center;
+}
+.stattabl {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #b1b5b4;
+    @media all and (max-width: $brec-point1) {
+        font-size: 15px;
+        line-height: 22px;
+    }
+}
