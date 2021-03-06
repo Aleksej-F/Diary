@@ -363,7 +363,7 @@ myClik = function (e) {
 	setTimeout(() => this.children[0].classList.remove('cir3'), 200);	// удаляем класс, для повтора анимации
 	this.children[0].classList.add ('cir2');            // устанавливаем класс 'cir2', для фиксации круга-подсведки
 				
-	jacheka = this.getAttribute('data');
+	jacheka = this ;
 
 	tablDen(vidcodmed[jacheka][0]); // обращение к функции заполнения таблицы записей дня
 	//jacheka = num;
